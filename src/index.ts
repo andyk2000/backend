@@ -26,8 +26,6 @@ const config: Config = {
   frontend: process.env.FRONTEND_LINK || "urubuto",
 };
 
-console.log(config);
-
 const sequelize = new Sequelize(config.database, config.user, config.password, {
   host: config.host,
   dialect: "postgres",
