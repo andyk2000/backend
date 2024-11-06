@@ -23,42 +23,42 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
 const initializeUser = (sequelize: Sequelize) => {
   User.init(
     {
-        id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true,
-        },
-        names: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-        },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        typeOfAccount: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            defaultValue: "customer",
-        },
-        institutionId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        title: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            defaultValue: "doctor"
-        },
-        phone: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        }
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      names: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      typeOfAccount: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: "customer",
+      },
+      institutionId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: "doctor",
+      },
+      phone: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     },
     {
       sequelize,
@@ -68,6 +68,4 @@ const initializeUser = (sequelize: Sequelize) => {
   );
 };
 
-export {
-  initializeUser,
-};
+export { initializeUser, User };
