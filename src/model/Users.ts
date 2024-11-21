@@ -68,4 +68,8 @@ const initializeUser = (sequelize: Sequelize) => {
   );
 };
 
-export { initializeUser, User };
+const createUser = async (user: CreationAttributes<User>) => {
+  return await User.create(user);
+};
+
+export { initializeUser, User, createUser };
