@@ -32,7 +32,7 @@ const config: Config = {
   user: process.env.DB_USER || "root",
   password: process.env.DB_PASSWORD || "",
   database: process.env.DB_DATABASE || "mydatabase",
-  frontend: process.env.FRONTEND_LINK || "urubuto",
+  frontend: process.env.FRONTEND_LINK || "",
 };
 
 const sequelize = new Sequelize(config.database, config.user, config.password, {
@@ -41,13 +41,13 @@ const sequelize = new Sequelize(config.database, config.user, config.password, {
   logging: false,
 });
 
-initializeAppeal(sequelize);
+initializeUser(sequelize);
 initializeBill(sequelize);
 initializeMedicalFacility(sequelize);
 initializePatient(sequelize);
 initializeRequest(sequelize);
 initializeResponse(sequelize);
-initializeUser(sequelize);
+initializeAppeal(sequelize);
 
 User.belongsTo(MedicalFacility);
 MedicalFacility.hasMany(User);
@@ -61,12 +61,8 @@ Request.belongsTo(MedicalFacility);
 MedicalFacility.hasMany(Request);
 Response.belongsTo(Request);
 Request.hasOne(Response);
-Appeal.belongsTo(User);
-User.hasMany(Appeal);
-Appeal.belongsTo(Patient);
-Patient.hasMany(Appeal);
-Appeal.belongsTo(MedicalFacility);
-MedicalFacility.hasMany(Appeal);
+Appeal.belongsTo(Response);
+Response.hasMany(Appeal);
 
 app.use(errors());
 

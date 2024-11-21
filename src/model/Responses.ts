@@ -51,7 +51,7 @@ const initializeResponse = (sequelize: Sequelize) => {
     },
     {
       sequelize,
-      modelName: "request",
+      modelName: "response",
       timestamps: false,
     },
   );

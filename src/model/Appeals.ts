@@ -14,11 +14,7 @@ class Appeal extends Model<
   InferCreationAttributes<Appeal>
 > {
   declare id: CreationOptional<number>;
-  declare patientId: number;
-  declare doctorId: number;
-  declare medicalfacilityId: number;
   declare responseId: number;
-  declare response: string;
   declare argument: string;
   declare additionalresources: string;
   declare status: string;
@@ -33,30 +29,6 @@ const initializeAppeal = (sequelize: Sequelize) => {
         autoIncrement: true,
         primaryKey: true,
       },
-      patientId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: "patients",
-          key: "id",
-        },
-      },
-      doctorId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: "users",
-          key: "id",
-        },
-      },
-      medicalfacilityId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: "medicalFacilities",
-          key: "id",
-        },
-      },
       responseId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -64,10 +36,6 @@ const initializeAppeal = (sequelize: Sequelize) => {
           model: "responses",
           key: "id",
         },
-      },
-      response: {
-        type: DataTypes.STRING,
-        allowNull: false,
       },
       argument: {
         type: DataTypes.STRING,
@@ -88,7 +56,7 @@ const initializeAppeal = (sequelize: Sequelize) => {
     },
     {
       sequelize,
-      modelName: "bill",
+      modelName: "appeal",
       timestamps: false,
     },
   );
