@@ -1,5 +1,5 @@
-// import express from "express";
-// const userRouter = express.Router();
+import express from "express";
+const userRouter = express.Router();
 // import { signUp, logIn } from "../controllers/UserController";
 // import {
 //   loginValidation,
@@ -9,4 +9,4 @@
 // userRouter.post("/signup", signupValidation, signUp);
 // userRouter.post("/login", loginValidation, logIn);
 
-// export { userRouter };
+export { userRouter };
