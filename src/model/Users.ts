@@ -72,4 +72,13 @@ const createUser = async (user: CreationAttributes<User>) => {
   return await User.create(user);
 };
 
-export { initializeUser, User, createUser };
+const getUserEmail = async (email: string) => {
+  const userData = await User.findOne({
+    where: {
+      email: email,
+    },
+  });
+  return userData;
+};
+
+export { initializeUser, User, createUser, getUserEmail };
