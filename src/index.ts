@@ -9,15 +9,19 @@ import bodyParser from "body-parser";
 
 import { Appeal, initializeAppeal } from "./model/Appeals";
 import { Bill, initializeBill } from "./model/Bills";
-import { initializeMedicalFacility, MedicalFacility } from "./model/MedicalFacilities";
+import {
+  initializeMedicalFacility,
+  MedicalFacility,
+} from "./model/MedicalFacilities";
 import { initializePatient, Patient } from "./model/Patients";
 import { initializeRequest, Request } from "./model/Requests";
 import { initializeResponse, Response } from "./model/Responses";
 import { initializeUser, User } from "./model/Users";
 import { errors } from "celebrate";
+import { userRouter } from "./routes/userRoutes";
 
 const app: Express = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 interface Config {
   host: string;
@@ -34,6 +38,8 @@ const config: Config = {
   database: process.env.DB_DATABASE || "mydatabase",
   frontend: process.env.FRONTEND_LINK || "",
 };
+
+app.use(cors());
 
 const sequelize = new Sequelize(config.database, config.user, config.password, {
   host: config.host,
@@ -64,9 +70,9 @@ Request.hasOne(Response);
 Appeal.belongsTo(Response);
 Response.hasMany(Appeal);
 
-app.use(errors());
+app.use("/home", userRouter);
 
-app.use(express.static("public"));
+app.use(errors());
 
 app.listen(port, async () => {
   await sequelize.sync({ alter: true });

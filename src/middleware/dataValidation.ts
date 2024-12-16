@@ -21,8 +21,22 @@ const signupValidation = celebrate({
       "any.required": "Password is required",
       "string.min": "Password must be at least 6 characters long",
     }),
-    role: Joi.string().valid("owner", "customer").messages({
-      "any.only": 'Role must be either "owner" or "customer"',
+    typeOfAccount: Joi.string().required().messages({
+      "any.required": "typeOfAccount is required",
+      "string.base": "Type Of Account must be a string!",
+    }),
+    institutionId: Joi.number().required().messages({
+      "any.required": "InstitutionId is required",
+      "number.base": "Institution id must be a number",
+    }),
+    title: Joi.string().required().messages({
+      "any.required": "title is required",
+      "string.base": "title must be a string",
+    }),
+    phone: Joi.string().min(10).messages({
+      "any.only": 'a mobile phone number is required',
+      "string.base": "phone number must be a string",
+      "string.min": "phone number must have a length of 10 integers",
     }),
   }),
 });
