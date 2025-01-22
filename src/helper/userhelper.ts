@@ -14,11 +14,12 @@ const config: Config = {
 
 
 
-const generateAccessToken = (email: string, id: number) => {
+const generateAccessToken = (email: string, id: number, typeOfAccount: string) => {
   return jwt.sign(
     {
       id,
       email,
+      typeOfAccount,
     },
     config.secretKey,
     {
