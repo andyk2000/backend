@@ -33,7 +33,7 @@ const signupValidation = celebrate({
       "any.required": "title is required",
       "string.base": "title must be a string",
     }),
-    phone: Joi.string().min(10).messages({
+    phone: Joi.number().min(10).messages({
       "any.only": 'a mobile phone number is required',
       "string.base": "phone number must be a string",
       "string.min": "phone number must have a length of 10 integers",

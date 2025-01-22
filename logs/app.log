@@ -1,0 +1,44 @@
+{"timestamp": "2025-01-21 12:50:36.466 PM", "level": "error", "message": "	unhandledRejection: Cannot destructure property 'names' of 'request.body' as it is undefined.
+TypeError: Cannot destructure property 'names' of 'request.body' as it is undefined.
+    at F:\Andy\school\final\backend\src\controller\UsersController.ts:25:11
+    at Generator.next (<anonymous>)
+    at F:\Andy\school\final\backend\src\controller\UsersController.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (F:\Andy\school\final\backend\src\controller\UsersController.ts:4:12)
+    at signUp (F:\Andy\school\final\backend\src\controller\UsersController.ts:23:78)
+    at Layer.handle [as handle_request] (F:\Andy\school\final\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (F:\Andy\school\final\backend\node_modules\express\lib\router\route.js:149:13)"}
+{"timestamp": "2025-01-21 12:58:02.679 PM", "level": "error", "message": "	unhandledRejection: Cannot destructure property 'names' of 'request.body' as it is undefined.
+TypeError: Cannot destructure property 'names' of 'request.body' as it is undefined.
+    at F:\Andy\school\final\backend\src\controller\UsersController.ts:25:11
+    at Generator.next (<anonymous>)
+    at F:\Andy\school\final\backend\src\controller\UsersController.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (F:\Andy\school\final\backend\src\controller\UsersController.ts:4:12)
+    at signUp (F:\Andy\school\final\backend\src\controller\UsersController.ts:23:78)
+    at Layer.handle [as handle_request] (F:\Andy\school\final\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (F:\Andy\school\final\backend\node_modules\express\lib\router\route.js:149:13)"}
+{"timestamp": "2025-01-22 02:40:30.781 PM", "level": "error", "message": "	uncaughtException: listen EADDRINUSE: address already in use :::3000
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (F:\Andy\school\final\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (F:\Andy\school\final\backend\src\index.ts:79:5)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module.m._compile (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Object.require.extensions.<computed> [as .ts] (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)"}
+{"timestamp": "2025-01-22 02:41:57.668 PM", "level": "error", "message": "	uncaughtException: listen EADDRINUSE: address already in use :::3000
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (F:\Andy\school\final\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (F:\Andy\school\final\backend\src\index.ts:79:5)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module.m._compile (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Object.require.extensions.<computed> [as .ts] (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)"}

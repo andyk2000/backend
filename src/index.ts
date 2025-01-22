@@ -40,6 +40,8 @@ const config: Config = {
 };
 
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const sequelize = new Sequelize(config.database, config.user, config.password, {
   host: config.host,
