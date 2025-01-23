@@ -52,4 +52,11 @@ const initializeMedicalFacility = (sequelize: Sequelize) => {
   );
 };
 
-export { initializeMedicalFacility, MedicalFacility };
+const findAllMDFName = async () => {
+  const medicalFacilities = await MedicalFacility.findAll({
+    attributes: ["name","id"],
+  });
+  return medicalFacilities;
+};
+
+export { initializeMedicalFacility, MedicalFacility, findAllMDFName };

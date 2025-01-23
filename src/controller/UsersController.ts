@@ -21,7 +21,7 @@ const logIn = async (request: Request, response: Response): Promise<void> => {
 };
 
 const signUp = async (request: Request, response: Response): Promise<void> => {
-  const { names, email, password, typeOfAccount, institutionId, title, phone } =
+  const { names, email, password, institutionId, title, phone } =
     request.body;
   try {
     const hashedPassword = encryptPassword(password);
@@ -29,8 +29,8 @@ const signUp = async (request: Request, response: Response): Promise<void> => {
       names,
       email,
       password: hashedPassword,
-      typeOfAccount,
       institutionId,
+      typeOfAccount: "end-user",
       title,
       phone,
     });

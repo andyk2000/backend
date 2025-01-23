@@ -19,6 +19,7 @@ import { initializeResponse, Response } from "./model/Responses";
 import { initializeUser, User } from "./model/Users";
 import { errors } from "celebrate";
 import { userRouter } from "./routes/userRoutes";
+import { mdfRouter } from "./routes/medicalFacilityRoutes";
 
 const app: Express = express();
 const port = process.env.PORT;
@@ -73,6 +74,7 @@ Appeal.belongsTo(Response);
 Response.hasMany(Appeal);
 
 app.use("/home", userRouter);
+app.use("/", mdfRouter);
 
 app.use(errors());
 

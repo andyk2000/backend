@@ -42,3 +42,150 @@ Error: listen EADDRINUSE: address already in use :::3000
     at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
     at Object.require.extensions.<computed> [as .ts] (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1621:12)
     at Module.load (node:internal/modules/cjs/loader:1207:32)"}
+{"timestamp": "2025-01-22 05:13:35.176 PM", "level": "error", "message": "	uncaughtException: listen EADDRINUSE: address already in use :::3001
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (F:\Andy\school\final\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (F:\Andy\school\final\backend\src\index.ts:79:5)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module.m._compile (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Object.require.extensions.<computed> [as .ts] (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)"}
+{"timestamp": "2025-01-22 05:16:55.900 PM", "level": "error", "message": "	uncaughtException: listen EADDRINUSE: address already in use :::3001
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (F:\Andy\school\final\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (F:\Andy\school\final\backend\src\index.ts:79:5)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module.m._compile (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Object.require.extensions.<computed> [as .ts] (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)"}
+{"timestamp": "2025-01-22 05:18:35.887 PM", "level": "error", "message": "	uncaughtException: listen EADDRINUSE: address already in use :::3001
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (F:\Andy\school\final\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (F:\Andy\school\final\backend\src\index.ts:79:5)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module.m._compile (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Object.require.extensions.<computed> [as .ts] (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)"}
+{"timestamp": "2025-01-22 05:21:35.245 PM", "level": "error", "message": "	uncaughtException: listen EADDRINUSE: address already in use :::3001
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (F:\Andy\school\final\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (F:\Andy\school\final\backend\src\index.ts:79:5)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module.m._compile (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Object.require.extensions.<computed> [as .ts] (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)"}
+{"timestamp": "2025-01-22 05:21:58.766 PM", "level": "error", "message": "	uncaughtException: listen EADDRINUSE: address already in use :::3001
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (F:\Andy\school\final\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (F:\Andy\school\final\backend\src\index.ts:79:5)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module.m._compile (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Object.require.extensions.<computed> [as .ts] (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)"}
+{"timestamp": "2025-01-22 05:24:06.752 PM", "level": "error", "message": "	uncaughtException: listen EADDRINUSE: address already in use :::3001
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (F:\Andy\school\final\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (F:\Andy\school\final\backend\src\index.ts:79:5)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module.m._compile (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Object.require.extensions.<computed> [as .ts] (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)"}
+{"timestamp": "2025-01-22 05:25:09.833 PM", "level": "error", "message": "	uncaughtException: listen EADDRINUSE: address already in use :::3001
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (F:\Andy\school\final\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (F:\Andy\school\final\backend\src\index.ts:79:5)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module.m._compile (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Object.require.extensions.<computed> [as .ts] (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)"}
+{"timestamp": "2025-01-22 05:26:11.601 PM", "level": "error", "message": "	uncaughtException: listen EADDRINUSE: address already in use :::3001
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (F:\Andy\school\final\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (F:\Andy\school\final\backend\src\index.ts:79:5)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module.m._compile (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Object.require.extensions.<computed> [as .ts] (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)"}
+{"timestamp": "2025-01-22 05:28:18.903 PM", "level": "error", "message": "	uncaughtException: listen EADDRINUSE: address already in use :::3001
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (F:\Andy\school\final\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (F:\Andy\school\final\backend\src\index.ts:79:5)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module.m._compile (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Object.require.extensions.<computed> [as .ts] (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)"}
+{"timestamp": "2025-01-22 05:29:34.372 PM", "level": "error", "message": "	uncaughtException: listen EADDRINUSE: address already in use :::3001
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (F:\Andy\school\final\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (F:\Andy\school\final\backend\src\index.ts:81:5)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module.m._compile (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Object.require.extensions.<computed> [as .ts] (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)"}
+{"timestamp": "2025-01-22 05:42:32.275 PM", "level": "error", "message": "	uncaughtException: listen EADDRINUSE: address already in use :::3001
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (F:\Andy\school\final\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (F:\Andy\school\final\backend\src\index.ts:81:5)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module.m._compile (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Object.require.extensions.<computed> [as .ts] (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)"}
+{"timestamp": "2025-01-23 12:19:19.211 PM", "level": "error", "message": "	uncaughtException: listen EADDRINUSE: address already in use :::3001
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (F:\Andy\school\final\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (F:\Andy\school\final\backend\src\index.ts:81:5)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module.m._compile (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Object.require.extensions.<computed> [as .ts] (F:\Andy\school\final\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)"}
+{"timestamp": "2025-01-23 12:31:22.854 PM", "level": "error", "message": "	Error creating user value "250732887022" is out of range for type integer"}
+{"timestamp": "2025-01-23 12:34:24.823 PM", "level": "error", "message": "	Error creating user Validation error"}
+{"timestamp": "2025-01-23 12:38:30.249 PM", "level": "error", "message": "	Error creating user Validation error"}

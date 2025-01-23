@@ -21,10 +21,6 @@ const signupValidation = celebrate({
       "any.required": "Password is required",
       "string.min": "Password must be at least 6 characters long",
     }),
-    typeOfAccount: Joi.string().required().messages({
-      "any.required": "typeOfAccount is required",
-      "string.base": "Type Of Account must be a string!",
-    }),
     institutionId: Joi.number().required().messages({
       "any.required": "InstitutionId is required",
       "number.base": "Institution id must be a number",
