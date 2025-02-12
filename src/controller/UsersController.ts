@@ -11,7 +11,11 @@ const logIn = async (request: Request, response: Response): Promise<void> => {
     if (!user || user.password !== encrypted) {
       response.status(404).json({ error: "Login failed. Please try again." });
     } else {
-      const token = generateAccessToken(user.email, user.id, user.typeOfAccount);
+      const token = generateAccessToken(
+        user.email,
+        user.id,
+        user.typeOfAccount,
+      );
       response.status(200).json({ token });
     }
   } catch (error) {
@@ -21,8 +25,7 @@ const logIn = async (request: Request, response: Response): Promise<void> => {
 };
 
 const signUp = async (request: Request, response: Response): Promise<void> => {
-  const { names, email, password, institutionId, title, phone } =
-    request.body;
+  const { names, email, password, institutionId, title, phone } = request.body;
   try {
     const hashedPassword = encryptPassword(password);
     const newUser = await createUser({

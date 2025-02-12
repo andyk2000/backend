@@ -4,7 +4,7 @@ import winston, { format } from "winston";
 const options = {
   file: {
     level: "info",
-    filename: "./logs/app.log",
+    filename: "./loggs/app.log",
     handleExceptions: true,
     json: true,
     maxsize: 10485760,
@@ -57,10 +57,10 @@ const logger = winston.createLogger({
   ],
   exitOnError: false,
   exceptionHandlers: [
-    new winston.transports.File({ filename: "./logs/exception.log", format: fileFormat }),
+    new winston.transports.File({ filename: "./loggs/exception.log", format: fileFormat }),
   ],
   rejectionHandlers: [
-    new winston.transports.File({ filename: "./logs/rejections.log", format: fileFormat }),
+    new winston.transports.File({ filename: "./loggs/rejections.log", format: fileFormat }),
   ],
 });
 

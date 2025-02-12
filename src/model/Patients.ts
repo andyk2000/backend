@@ -62,9 +62,13 @@ const initializePatient = (sequelize: Sequelize) => {
     {
       sequelize,
       modelName: "patient",
-      timestamps: false,
+      timestamps: true,
     },
   );
 };
 
-export { initializePatient, Patient };
+const createPatient = async (patient: CreationAttributes<Patient>) => {
+  return await Patient.create(patient);
+};
+
+export { initializePatient, createPatient, Patient };

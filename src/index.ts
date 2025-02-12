@@ -20,6 +20,7 @@ import { initializeUser, User } from "./model/Users";
 import { errors } from "celebrate";
 import { userRouter } from "./routes/userRoutes";
 import { mdfRouter } from "./routes/medicalFacilityRoutes";
+import { patientRouter } from "./routes/patientRoutes";
 
 const app: Express = express();
 const port = process.env.PORT;
@@ -75,6 +76,7 @@ Response.hasMany(Appeal);
 
 app.use("/home", userRouter);
 app.use("/", mdfRouter);
+app.use("/patient", patientRouter);
 
 app.use(errors());
 

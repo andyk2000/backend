@@ -22,6 +22,7 @@ class Request extends Model<
   declare resources: string;
   declare status: string;
   declare date: Date;
+  declare mdaId: number;
 }
 
 const initializeRequest = (sequelize: Sequelize) => {
@@ -77,13 +78,24 @@ const initializeRequest = (sequelize: Sequelize) => {
         type: DataTypes.DATE,
         allowNull: false,
       },
+      mdaId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: "users",
+          key: "id",
+        },
+      }
     },
     {
       sequelize,
       modelName: "request",
-      timestamps: false,
+      timestamps: true,
     },
   );
 };
 
-export { initializeRequest,Request };
+const createRequest = async (request: CreationAttributes<Request>) => {
+  return await Request.create(request);
+};
+
+export { initializeRequest, createRequest, Request };
