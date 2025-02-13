@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Welcome to CLAIMSURE</title>
+    <style>
+      body {
+        width: 100%;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        margin: 0;
+        padding: 0;
+      }
+      .title {
+        text-align: center;
+      }
+      .container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .header {
+        text-align: center;
+        padding-bottom: 0.5rem;
+        background-color: #3e61ac;
+        color: #ffffff;
+        border-radius: 8px 8px 0 0;
+      }
+      .header img {
+        max-width: 100px;
+        margin-top: 20px;
+      }
+      .content {
+        padding-top: 0.5rem;
+        padding-inline: 1rem;
+      }
+      .content h1 {
+        color: #3e61ac;
+      }
+      .content p {
+        margin: 0 0 10px;
+        text-align: justify;
+      }
+      .content a {
+        color: #3e61ac;
+        text-decoration: none;
+      }
+      .content a:hover {
+        text-decoration: underline;
+      }
+      .content ul {
+        list-style-type: none;
+        padding: 0;
+        line-height: 0rem;
+      }
+      .content ul li {
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 4px;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 0.9em;
+        color: #777;
+      }
+      .button {
+        text-decoration: none;
+        color: rgba(62, 97, 172, 0.2);
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 20px auto;
+        background-color: rgba(62, 97, 172, 0.2);
+        border-style: none;
+        border-radius: 4px;
+      }
+      .button:hover {
+        background-color: rgba(62, 97, 172, 0.4);
+        text-decoration: none;
+      }
+      .sub-text-category h4 {
+        margin: 0 0 10px;
+      }
+      .title {
+        font-size: 1.75rem;
+        padding-left: 2rem;
+        color: rgba(0, 0, 0, 0.75);
+        font-family: Impact, Haettenschweiler, " Arial Narrow Bold ", sans-serif;
+      }
+
+      .ch-blue {
+        color: rgba(62, 97, 172);
+      }
+
+      .ch-yellow {
+        color: #f2e97f;
+      }
+
+      .ch-red {
+        color: #f9977b;
+      }
+      @media (min-width: 481px) and (max-width: 768px) {
+        body {
+          width: 100%;
+          margin: 0%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <img src="cid:logo" alt="Company Logo" />
+      </div>
+      <h2 class="title">
+        <span class="ch-blue">O</span>nline-<span class="ch-yellow">S</span
+        >hopping-<span class="ch-red">M</span>all
+      </h2>
+      <div class="content">
+        <h1>Welcome, <%= user_firstname %>!</h1>
+        <p>
+          We are thrilled to have you join our online shopping community. As a
+          token of our appreciation, we're giving you a special welcome gift – a
+          50% off coupon on your first purchase! Use code WELCOME50 at checkout.
+        </p>
+        <p>
+          If you have any questions, feel free to
+          <a href="contact-url">contact us</a>.
+        </p>
+        <a href="http://localhost:3000" class="button">Get Started</a>
+        <p>Best regards,</p>
+        <p>The OSM Team</p>
+        <p>
+          Discover the latest trends in fashion, electronics, home goods, and
+          more. Here are some of the top categories we think you’ll love:
+        </p>
+        <div class="category-container">
+          <div class="sub-text-category">
+            <h4>Fashion Deals:</h4>
+            <ul>
+              <li>Stylish summer collections with up to 70% off.</li>
+              <li>Exclusive designer brands now available.</li>
+            </ul>
+          </div>
+          <div class="sub-text-category">
+            <h4>Electronics:</h4>
+            <ul>
+              <li>Latest gadgets and devices at unbeatable prices.</li>
+              <li>Top brands with exclusive discounts.</li>
+            </ul>
+          </div>
+          <div class="sub-text-category">
+            <h4>Home Goods:</h4>
+            <ul>
+              <li>Modern furniture and decor with huge savings.</li>
+              <li>Everything you need to beautify your home.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <p>&copy; 2024 OSM. All rights reserved.</p>
+      </div>
+    </div>
+  </body>
+</html>
