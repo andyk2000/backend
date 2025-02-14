@@ -44,4 +44,21 @@ const signUp = async (request: Request, response: Response): Promise<void> => {
   }
 };
 
-export { logIn, signUp };
+const emailCheck = async (request: Request, response: Response) => {
+  const { email } = request.body;
+  try {
+    const user = await getUserEmail(email);
+    if (user) {
+      response.status(200).json({ result: "user found" });
+    } else {
+      response.status(500).json({ resul: "user not found" });
+    }
+  } catch (error) {
+    logger.error("Error retrieving user with email:", email);
+    response
+      .status(500)
+      .json({ result: "Error retrieving user with email:" + email });
+  }
+};
+
+export { logIn, signUp, emailCheck };

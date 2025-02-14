@@ -69,4 +69,13 @@ const patientValidation = celebrate({
   }),
 });
 
-export { loginValidation, signupValidation, patientValidation };
+const emailFormatCheck = celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    email: Joi.string().required().email().messages({
+      "any.required": "must add an Email",
+      "string.email": "Email must be a valid email address",
+    }),
+  }),
+});
+
+export { loginValidation, signupValidation, patientValidation, emailFormatCheck };
