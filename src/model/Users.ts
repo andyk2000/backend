@@ -45,6 +45,9 @@ const initializeUser = (sequelize: Sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
         defaultValue: "customer",
+        validate: {
+          isIn: [["admin", "md-admin", "md-user"]],
+        },
       },
       institutionId: {
         type: DataTypes.INTEGER,
