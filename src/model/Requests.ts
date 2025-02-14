@@ -8,6 +8,7 @@ import {
   CreationOptional,
   CreationAttributes,
 } from "sequelize";
+import { User } from "./Users";
 
 class Request extends Model<
   InferAttributes<Request>,
@@ -84,7 +85,7 @@ const initializeRequest = (sequelize: Sequelize) => {
           model: "users",
           key: "id",
         },
-      }
+      },
     },
     {
       sequelize,
@@ -98,4 +99,47 @@ const createRequest = async (request: CreationAttributes<Request>) => {
   return await Request.create(request);
 };
 
-export { initializeRequest, createRequest, Request };
+const getRequestById = async (id: number) => {
+  return await Request.findOne({
+    where: {
+      id: id,
+    },
+  });
+};
+
+const getRequestByMDF = async (id: number) => {
+  return await Request.findAll({
+    where: {
+      medicalFacilityId: id,
+    },
+  });
+};
+
+const getRequestByDoctor = async (id: number) => {
+  return await Request.findAll({
+    where: {
+      doctorId: id,
+    },
+  });
+};
+
+const getRequestByPatient = async (id: number) => {
+  return await Request.findAll({
+    where: {
+      patientId: id,
+    },
+    include: {
+      model: User,
+    },
+  });
+};
+
+export {
+  initializeRequest,
+  createRequest,
+  Request,
+  getRequestById,
+  getRequestByMDF,
+  getRequestByPatient,
+  getRequestByDoctor,
+};
