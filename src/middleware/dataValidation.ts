@@ -78,4 +78,19 @@ const emailFormatCheck = celebrate({
   }),
 });
 
-export { loginValidation, signupValidation, patientValidation, emailFormatCheck };
+const mdfIdFormatCheck = celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    id: Joi.number().required().messages({
+      "any.required": "must add an Email",
+      "string.number": "The medical facilty id must be a number",
+    }),
+  }),
+});
+
+export {
+  loginValidation,
+  signupValidation,
+  patientValidation,
+  emailFormatCheck,
+  mdfIdFormatCheck,
+};

@@ -54,9 +54,21 @@ const initializeMedicalFacility = (sequelize: Sequelize) => {
 
 const findAllMDFName = async () => {
   const medicalFacilities = await MedicalFacility.findAll({
-    attributes: ["name","id"],
+    attributes: ["name", "id"],
   });
   return medicalFacilities;
 };
 
-export { initializeMedicalFacility, MedicalFacility, findAllMDFName };
+const findMDFByID = async (id: number) => {
+  const mdf = await MedicalFacility.findOne({
+    where: { id: id },
+  });
+  return mdf;
+};
+
+export {
+  initializeMedicalFacility,
+  MedicalFacility,
+  findAllMDFName,
+  findMDFByID,
+};

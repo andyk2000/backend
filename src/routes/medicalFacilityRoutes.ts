@@ -1,8 +1,10 @@
 import express from "express";
 const mdfRouter = express.Router();
-import { allMDF } from "../controller/MedicalFacilityController";
+import { allMDF, mdfById } from "../controller/MedicalFacilityController";
+import { mdfIdFormatCheck } from "../middleware/dataValidation";
 
 
-mdfRouter.get("/mdfs/", allMDF);
+mdfRouter.get("/", allMDF);
+mdfRouter.post("/by-id", mdfIdFormatCheck, mdfById);
 
 export { mdfRouter };

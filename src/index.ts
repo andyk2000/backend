@@ -75,7 +75,7 @@ Appeal.belongsTo(Response);
 Response.hasMany(Appeal);
 
 app.use("/home", userRouter);
-app.use("/", mdfRouter);
+app.use("/mdfs", mdfRouter);
 app.use("/patient", patientRouter);
 
 app.use(errors());
