@@ -1,4 +1,8 @@
-import { findAllMDFName, findMDFByID } from "../model/MedicalFacilities";
+import {
+  findAllMDFName,
+  findMDFByID,
+  updateMDAdmin,
+} from "../model/MedicalFacilities";
 import { Request, Response } from "express";
 import { logger } from "../../logger";
 import { error } from "console";
@@ -32,4 +36,15 @@ const mdfById = async (request: Request, response: Response) => {
   }
 };
 
-export { allMDF, mdfById };
+const updateAdminMDF = async (request: Request, response: Response) => {
+  const { mdfid, id } = request.body;
+  try {
+    const mdf = await updateMDAdmin({ adminId: id }, mdfid);
+    response.status(200).json({ mdf });
+  } catch (error) {
+    logger.info("failed to update the admin of the medical facility");
+    response.status(500).json({ error: "Internal server error:" + error });
+  }
+};
+
+export { allMDF, mdfById, updateAdminMDF };

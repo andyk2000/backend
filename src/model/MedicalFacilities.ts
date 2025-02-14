@@ -66,9 +66,18 @@ const findMDFByID = async (id: number) => {
   return mdf;
 };
 
+const updateMDAdmin = async (data: NonNullable<unknown>, id: number) => {
+  const mdf = await MedicalFacility.update(data, {
+    where: {
+      id: id,
+    },
+  });
+};
+
 export {
   initializeMedicalFacility,
   MedicalFacility,
   findAllMDFName,
   findMDFByID,
+  updateMDAdmin,
 };
