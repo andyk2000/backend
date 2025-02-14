@@ -74,6 +74,9 @@ const initializeRequest = (sequelize: Sequelize) => {
       status: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          isIn: [["open", "on-going", "closed", "appeal"]],
+        },
       },
       date: {
         type: DataTypes.DATE,
@@ -134,6 +137,15 @@ const getRequestByPatient = async (id: number) => {
   });
 };
 
+const updateRequestStatus = async (id: number, status: string) => {
+  const updatedRequest = await Request.update(
+    { status: status },
+    {
+      where: { id: id },
+    },
+  );
+};
+
 export {
   initializeRequest,
   createRequest,
@@ -142,4 +154,5 @@ export {
   getRequestByMDF,
   getRequestByPatient,
   getRequestByDoctor,
+  updateRequestStatus,
 };
