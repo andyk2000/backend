@@ -9,23 +9,22 @@ import {
   CreationAttributes,
 } from "sequelize";
 
-class Patient extends Model<
-  InferAttributes<Patient>,
-  InferCreationAttributes<Patient>
+class Dependent extends Model<
+  InferAttributes<Dependent>,
+  InferCreationAttributes<Dependent>
 > {
   declare id: CreationOptional<number>;
   declare names: string;
   declare phone: number;
   declare age: string;
-  declare address: string;
   declare sex: string;
-  declare dependent: boolean;
   declare nationalId: number;
   declare patientIdentification: number;
+  declare parentID: number;
 }
 
-const initializePatient = (sequelize: Sequelize) => {
-  Patient.init(
+const initializeDependent = (sequelize: Sequelize) => {
+  Dependent.init(
     {
       id: {
         type: DataTypes.INTEGER,
@@ -44,16 +43,8 @@ const initializePatient = (sequelize: Sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      address: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
       sex: {
         type: DataTypes.STRING,
-        allowNull: false,
-      },
-      dependent: {
-        type: DataTypes.BOOLEAN,
         allowNull: false,
       },
       nationalId: {
@@ -65,24 +56,33 @@ const initializePatient = (sequelize: Sequelize) => {
         allowNull: false,
         unique: true,
       },
+      parentID: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "patients",
+          key: "id",
+        },
+      },
     },
     {
       sequelize,
-      modelName: "patient",
+      modelName: "dependnet",
       timestamps: true,
     },
   );
 };
 
-const createPatient = async (patient: CreationAttributes<Patient>) => {
-  return await Patient.create(patient);
+const createDependent = async (dependent: CreationAttributes<Dependent>) => {
+  return await Dependent.create(dependent);
 };
 
-const getPatientById = async (id: number) => {
-  return await Patient.findOne({
+const getDependentById = async (id: number) => {
+  return await Dependent.findOne({
     where: {
       id: id,
     },
   });
 };
-export { initializePatient, createPatient, getPatientById, Patient };
+
+export { createDependent, getDependentById, Dependent, initializeDependent };

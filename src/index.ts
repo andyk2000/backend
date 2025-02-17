@@ -21,6 +21,7 @@ import { errors } from "celebrate";
 import { userRouter } from "./routes/userRoutes";
 import { mdfRouter } from "./routes/medicalFacilityRoutes";
 import { patientRouter } from "./routes/patientRoutes";
+import { Dependent, initializeDependent } from "./model/Dependent";
 
 const app: Express = express();
 const port = process.env.PORT;
@@ -58,6 +59,7 @@ initializePatient(sequelize);
 initializeRequest(sequelize);
 initializeResponse(sequelize);
 initializeAppeal(sequelize);
+initializeDependent(sequelize);
 
 User.belongsTo(MedicalFacility);
 MedicalFacility.hasMany(User);
@@ -73,6 +75,8 @@ Response.belongsTo(Request);
 Request.hasOne(Response);
 Appeal.belongsTo(Response);
 Response.hasMany(Appeal);
+Dependent.belongsTo(Patient);
+Patient.hasMany(Dependent);
 
 app.use("/home", userRouter);
 app.use("/mdfs", mdfRouter);
