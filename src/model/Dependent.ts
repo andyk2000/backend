@@ -67,7 +67,7 @@ const initializeDependent = (sequelize: Sequelize) => {
     },
     {
       sequelize,
-      modelName: "dependnet",
+      modelName: "dependent",
       timestamps: true,
     },
   );

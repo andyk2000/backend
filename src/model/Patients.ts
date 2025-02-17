@@ -15,12 +15,12 @@ class Patient extends Model<
 > {
   declare id: CreationOptional<number>;
   declare names: string;
-  declare phone: number;
+  declare phone: bigint;
   declare age: string;
   declare address: string;
   declare sex: string;
   declare dependent: boolean;
-  declare nationalId: number;
+  declare nationalId: bigint;
   declare patientIdentification: number;
 }
 
@@ -37,7 +37,7 @@ const initializePatient = (sequelize: Sequelize) => {
         allowNull: false,
       },
       phone: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         allowNull: false,
       },
       age: {
@@ -57,7 +57,7 @@ const initializePatient = (sequelize: Sequelize) => {
         allowNull: false,
       },
       nationalId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         allowNull: false,
       },
       patientIdentification: {
@@ -81,8 +81,9 @@ const createPatient = async (patient: CreationAttributes<Patient>) => {
 const getPatientById = async (id: number) => {
   return await Patient.findOne({
     where: {
-      id: id,
+      patientIdentification: id,
     },
   });
 };
+
 export { initializePatient, createPatient, getPatientById, Patient };

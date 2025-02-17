@@ -43,7 +43,7 @@ const patientValidation = celebrate({
       "any.required": "Full name of the patient are needed",
       "string.base": "the name must be a string",
     }),
-    phone: Joi.number().min(9).max(9).messages({
+    phone: Joi.required().messages({
       "any.only": "the mobile phone is required",
       "number.base": "phone number must not be an integer",
     }),
@@ -62,7 +62,7 @@ const patientValidation = celebrate({
     dependent: Joi.boolean().messages({
       "boolean.base": "The dependent is either true or false",
     }),
-    nationaId: Joi.number().min(16).max(16).required().messages({
+    nationalId: Joi.required().messages({
       "any.required": "The Id of the patient is required",
       "number.base": "The gender must be a number",
     }),
