@@ -34,6 +34,10 @@ const signupValidation = celebrate({
       "number.base": "phone number must not be an integer",
       "number.min": "phone number must have a length of 10 integers",
     }),
+    typeOfAccount: Joi.string().required().messages({
+      "any.required": "type of account needed",
+      "string.base": "type of account must be a string",
+    }),
   }),
 });
 

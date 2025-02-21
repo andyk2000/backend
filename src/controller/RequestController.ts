@@ -12,7 +12,6 @@ import {
 
 const registerRequest = async (request: Request, response: Response) => {
   const {
-    date,
     patientId,
     medicalfacilityId,
     title,
@@ -20,10 +19,10 @@ const registerRequest = async (request: Request, response: Response) => {
     resources,
     status,
     doctorId,
+    mda
   } = request.body;
   try {
     const clientRequest = await createRequest({
-      date,
       medicalFacilityId: medicalfacilityId,
       title,
       patientId,
@@ -31,7 +30,7 @@ const registerRequest = async (request: Request, response: Response) => {
       resources,
       status,
       doctorId: doctorId,
-      mdaId: 0,
+      mdaId: mda,
     });
     response.status(200).json(clientRequest);
   } catch (error) {

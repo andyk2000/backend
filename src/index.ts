@@ -22,6 +22,7 @@ import { userRouter } from "./routes/userRoutes";
 import { mdfRouter } from "./routes/medicalFacilityRoutes";
 import { patientRouter } from "./routes/patientRoutes";
 import { Dependent, initializeDependent } from "./model/Dependent";
+import { requestRouter } from "./routes/requestRoutes";
 
 const app: Express = express();
 const port = process.env.PORT;
@@ -81,6 +82,7 @@ Patient.hasMany(Dependent);
 app.use("/home", userRouter);
 app.use("/mdfs", mdfRouter);
 app.use("/patient", patientRouter);
+app.use("/request", requestRouter);
 
 app.use(errors());
 

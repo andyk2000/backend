@@ -22,7 +22,6 @@ class Request extends Model<
   declare description: string;
   declare resources: string;
   declare status: string;
-  declare date: Date;
   declare mdaId: number;
 }
 
@@ -77,10 +76,6 @@ const initializeRequest = (sequelize: Sequelize) => {
         validate: {
           isIn: [["open", "on-going", "closed", "appeal"]],
         },
-      },
-      date: {
-        type: DataTypes.DATE,
-        allowNull: false,
       },
       mdaId: {
         type: DataTypes.INTEGER,

@@ -46,7 +46,7 @@ const initializeUser = (sequelize: Sequelize) => {
         allowNull: false,
         defaultValue: "customer",
         validate: {
-          isIn: [["admin", "md-admin", "md-user"]],
+          isIn: [["admin", "md-admin", "md-user","mda"]],
         },
       },
       institutionId: {
