@@ -9,6 +9,7 @@ import {
   CreationAttributes,
 } from "sequelize";
 import { User } from "./Users";
+import { Patient } from "./Patients";
 
 class Request extends Model<
   InferAttributes<Request>,
@@ -21,8 +22,9 @@ class Request extends Model<
   declare title: string;
   declare description: string;
   declare resources: string;
-  declare status: string;
+  declare status: number;
   declare mdaId: number;
+  declare priority: number;
 }
 
 const initializeRequest = (sequelize: Sequelize) => {
@@ -71,10 +73,10 @@ const initializeRequest = (sequelize: Sequelize) => {
         allowNull: false,
       },
       status: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
-          isIn: [["open", "on-going", "closed", "appeal"]],
+          isIn: [[1, 2, 3, 4]],
         },
       },
       mdaId: {
@@ -82,6 +84,12 @@ const initializeRequest = (sequelize: Sequelize) => {
         references: {
           model: "users",
           key: "id",
+        },
+      },
+      priority: {
+        type: DataTypes.INTEGER,
+        validate: {
+          isIn: [[1, 2, 3]],
         },
       },
     },
@@ -115,8 +123,13 @@ const getRequestByMDF = async (id: number) => {
 
 const getRequestByDoctor = async (id: number) => {
   return await Request.findAll({
+    attributes: ["title", "patientId", "priority", "status"],
     where: {
       doctorId: id,
+    },
+    include: {
+      model: Patient,
+      attributes: ["names"],
     },
   });
 };
@@ -132,7 +145,7 @@ const getRequestByPatient = async (id: number) => {
   });
 };
 
-const updateRequestStatus = async (id: number, status: string) => {
+const updateRequestStatus = async (id: number, status: number) => {
   const updatedRequest = await Request.update(
     { status: status },
     {

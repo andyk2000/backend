@@ -6,6 +6,6 @@ import {
 } from "../middleware/dataValidation";
 
 patientRouter.post("/new-patient", patientValidation, registerNewPatient);
-patientRouter.post("/get-patient-personal-Id", getPatient);
+patientRouter.post("/get-patient-Id", getPatient);
 
 export { patientRouter };
