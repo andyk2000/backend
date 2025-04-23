@@ -101,7 +101,7 @@ const initializeRequest = (sequelize: Sequelize) => {
   );
 };
 
-const createRequest = async (request: CreationAttributes<Request>) => {
+const createRequest = async (request: Omit<InferCreationAttributes<Request, { omit: never; }>, "id">) => {
   return await Request.create(request);
 };
 

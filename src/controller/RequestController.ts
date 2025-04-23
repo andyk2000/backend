@@ -34,7 +34,6 @@ const registerRequest = async (request: Request, response: Response) => {
     resources,
     status,
     doctorId,
-    mda,
   } = request.body;
   try {
     const clientRequest = await createRequest({
@@ -45,8 +44,8 @@ const registerRequest = async (request: Request, response: Response) => {
       resources,
       status,
       doctorId: doctorId,
-      mdaId: mda,
       priority: 1,
+      mdaId: 1
     });
     response.status(200).json(clientRequest);
   } catch (error) {
@@ -64,7 +63,7 @@ const getRequestDoctor = async (request: Request, response: Response) => {
     const requestData = await getRequestByDoctor(id);
 
     const formattedData = requestData.map((rqst) => ({
-      ...rqst.toJSON(), // if it's a Sequelize instance
+      ...rqst.toJSON(),
       priority: priority[rqst.priority],
       status: status[rqst.status],
     }));
