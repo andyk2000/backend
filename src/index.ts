@@ -50,7 +50,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const sequelize = new Sequelize(config.database, config.user, config.password, {
   host: config.host,
   dialect: "postgres",
-  logging: false,
+  logging: false
 });
 
 initializeUser(sequelize);
@@ -86,7 +86,7 @@ app.use("/request", requestRouter);
 
 app.use(errors());
 
-app.listen(port, async () => {
+app.listen (port, async () => {
   await sequelize.sync({ alter: true });
   console.log("Server Listening on PORT:", port);
 });

@@ -9,12 +9,13 @@ interface Config {
 
 const config: Config = {
   secretKey: process.env.SECRET_KEY || "",
-
 };
 
-
-
-const generateAccessToken = (email: string, id: number, typeOfAccount: string) => {
+const generateAccessToken = (
+  email: string,
+  id: number,
+  typeOfAccount: string,
+) => {
   return jwt.sign(
     {
       id,

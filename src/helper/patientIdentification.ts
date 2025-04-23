@@ -2,7 +2,7 @@ import slugify from "slugify";
 
 const identificationGenerator = (lastId: string, age: string) => {
   const randomNum = Math.floor(Math.random() * (10 - 1)) + 1;
-  const UniqueIdentifier = slugify(lastId+"000" + age + randomNum);
+  const UniqueIdentifier = slugify(lastId + "000" + age + randomNum);
   return parseInt(UniqueIdentifier);
 };
 

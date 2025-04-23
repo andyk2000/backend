@@ -10,6 +10,10 @@ import { mdfAdminVerification } from "../middleware/roleVerification";
 
 mdfRouter.get("/", allMDF);
 mdfRouter.post("/by-id", mdfIdFormatCheck, mdfById);
-mdfRouter.post("/admin-change", [mdfFormatCheck,mdfAdminVerification ], updateAdminMDF);
+mdfRouter.post(
+  "/admin-change",
+  [mdfFormatCheck, mdfAdminVerification],
+  updateAdminMDF,
+);
 
 export { mdfRouter };

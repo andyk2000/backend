@@ -25,7 +25,8 @@ const logIn = async (request: Request, response: Response): Promise<void> => {
 };
 
 const signUp = async (request: Request, response: Response): Promise<void> => {
-  const { names, email, password, institutionId, title, phone, typeOfAccount } = request.body;
+  const { names, email, password, institutionId, title, phone, typeOfAccount } =
+    request.body;
   try {
     const hashedPassword = encryptPassword(password);
     const newUser = await createUser({
