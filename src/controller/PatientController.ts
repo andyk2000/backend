@@ -30,7 +30,6 @@ const getPatient = async (request: Request, response: Response) => {
   console.log(id);
   try {
     const patient = await getPatientById(id);
-    console.log(patient);
     response.status(200).json({ patient });
   } catch (error) {
     logger.error("error", error);

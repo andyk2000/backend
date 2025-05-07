@@ -31,7 +31,7 @@ const registerRequest = async (request: Request, response: Response) => {
     medicalfacilityId,
     title,
     description,
-    resources,
+    attachments,
     status,
     doctorId,
   } = request.body;
@@ -41,11 +41,11 @@ const registerRequest = async (request: Request, response: Response) => {
       title,
       patientId,
       description,
-      resources,
+      resources: attachments,
       status,
       doctorId: doctorId,
       priority: 1,
-      mdaId: 1
+      mdaId: 1,
     });
     response.status(200).json(clientRequest);
   } catch (error) {
