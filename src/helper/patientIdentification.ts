@@ -1,4 +1,5 @@
 import slugify from "slugify";
+import { getPatientById } from "../model/Patients";
 
 const identificationGenerator = (lastId: string, age: string) => {
   const randomNum = Math.floor(Math.random() * (10 - 1)) + 1;
@@ -19,4 +20,13 @@ const dependentIdentification = (
   return finalIdentification;
 };
 
-export { identificationGenerator, dependentIdentification };
+const getPatientIdentification = async (identification: number) => {
+  console.log("identification", identification);
+  return await getPatientById(identification);
+};
+
+export {
+  identificationGenerator,
+  dependentIdentification,
+  getPatientIdentification,
+};

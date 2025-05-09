@@ -9,6 +9,8 @@ import {
   getRequestByPatient,
   updateRequestStatus,
 } from "../model/Requests";
+import { uploadimage } from "../helper/photoUpload";
+import { getPatientIdentification } from "../helper/patientIdentification";
 
 const status: { [key: number]: string } = {
   1: "Initiated",
@@ -35,19 +37,40 @@ const registerRequest = async (request: Request, response: Response) => {
     status,
     doctorId,
   } = request.body;
+  let resources = false;
+  if (attachments) {
+    resources = true;
+  }
+  // console.log("attachments:", attachments);
+  console.log("resources:", resources);
+  console.log("status:", status);
+  console.log("doctorId:", doctorId);
+  console.log("medicalfacilityId:", medicalfacilityId);
+  console.log("title:", title);
+  console.log("patientId:", patientId);
+  console.log("description:", description);
   try {
-    const clientRequest = await createRequest({
-      medicalFacilityId: medicalfacilityId,
-      title,
-      patientId,
-      description,
-      resources: attachments,
-      status,
-      doctorId: doctorId,
-      priority: 1,
-      mdaId: 1,
-    });
-    response.status(200).json(clientRequest);
+    const patientIdentification = await getPatientIdentification(patientId);
+    console.log("patientIdentification:", patientIdentification);
+    if (patientIdentification) {
+      const clientRequest = await createRequest({
+        medicalFacilityId: 6,
+        title,
+        patientId: patientIdentification.id,
+        description,
+        resources,
+        status,
+        doctorId: doctorId,
+        priority: 1,
+        mdaId: 1,
+      });
+      const resourcesUpload = await uploadimage(attachments, clientRequest.id);
+      response.status(200).json(clientRequest);
+    } else {
+      response.status(404).json({
+        error: "Patient not found",
+      });
+    }
   } catch (error) {
     logger.error("Error creating a new request:", error);
     response.status(500).json({

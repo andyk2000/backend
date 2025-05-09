@@ -21,7 +21,7 @@ class Request extends Model<
   declare medicalFacilityId: number;
   declare title: string;
   declare description: string;
-  declare resources: string;
+  declare resources: boolean;
   declare status: number;
   declare mdaId: number;
   declare priority: number;
@@ -69,8 +69,7 @@ const initializeRequest = (sequelize: Sequelize) => {
         allowNull: false,
       },
       resources: {
-        type: DataTypes.STRING,
-        allowNull: false,
+        type: DataTypes.BOOLEAN,
       },
       status: {
         type: DataTypes.INTEGER,
@@ -101,7 +100,9 @@ const initializeRequest = (sequelize: Sequelize) => {
   );
 };
 
-const createRequest = async (request: Omit<InferCreationAttributes<Request, { omit: never; }>, "id">) => {
+const createRequest = async (
+  request: Omit<InferCreationAttributes<Request, { omit: never }>, "id">,
+) => {
   return await Request.create(request);
 };
 

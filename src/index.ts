@@ -23,6 +23,7 @@ import { mdfRouter } from "./routes/medicalFacilityRoutes";
 import { patientRouter } from "./routes/patientRoutes";
 import { Dependent, initializeDependent } from "./model/Dependent";
 import { requestRouter } from "./routes/requestRoutes";
+import { initializeResource, Resource } from "./model/Resources";
 
 const app: Express = express();
 const port = process.env.PORT;
@@ -44,13 +45,13 @@ const config: Config = {
 };
 
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: "10mb" })); // Adjust the limit as needed
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 
 const sequelize = new Sequelize(config.database, config.user, config.password, {
   host: config.host,
   dialect: "postgres",
-  logging: false
+  logging: false,
 });
 
 initializeUser(sequelize);
@@ -61,6 +62,7 @@ initializeRequest(sequelize);
 initializeResponse(sequelize);
 initializeAppeal(sequelize);
 initializeDependent(sequelize);
+initializeResource(sequelize);
 
 User.belongsTo(MedicalFacility);
 MedicalFacility.hasMany(User);
@@ -78,15 +80,17 @@ Appeal.belongsTo(Response);
 Response.hasMany(Appeal);
 Dependent.belongsTo(Patient);
 Patient.hasMany(Dependent);
+Request.hasMany(Resource);
+Resource.belongsTo(Request);
 
 app.use("/home", userRouter);
 app.use("/mdfs", mdfRouter);
 app.use("/patient", patientRouter);
-app.use("/request", requestRouter);
+app.use("/requests", requestRouter);
 
 app.use(errors());
 
-app.listen (port, async () => {
+app.listen(port, async () => {
   await sequelize.sync({ alter: true });
   console.log("Server Listening on PORT:", port);
 });

@@ -14,7 +14,7 @@ import {
 import { mdfVerification } from "../middleware/roleVerification";
 
 requestRouter.post("/get/id", getRequestID);
-requestRouter.post("/create", registerRequest);
+requestRouter.post("/new-request", registerRequest);
 requestRouter.post("/get/dID", getRequestDoctor);
 
 export { requestRouter };
