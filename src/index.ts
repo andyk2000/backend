@@ -24,6 +24,7 @@ import { patientRouter } from "./routes/patientRoutes";
 import { Dependent, initializeDependent } from "./model/Dependent";
 import { requestRouter } from "./routes/requestRoutes";
 import { initializeResource, Resource } from "./model/Resources";
+import { responseRouter } from "./routes/responseroutes";
 
 const app: Express = express();
 const port = process.env.PORT;
@@ -87,6 +88,7 @@ app.use("/home", userRouter);
 app.use("/mdfs", mdfRouter);
 app.use("/patient", patientRouter);
 app.use("/requests", requestRouter);
+app.use("/response", responseRouter);
 
 app.use(errors());
 

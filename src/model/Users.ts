@@ -84,6 +84,19 @@ const getUserEmail = async (email: string) => {
   return userData;
 };
 
+const getUserbyID = async (id: number) => {
+  const userData = await User.findOne({
+    where: {
+      id: id,
+    },
+  });
+  if (userData) {
+    return userData.typeOfAccount;
+  } else {
+    return null;
+  }
+};
+
 const getUserRolebyID = async (id: number) => {
   const userData = await User.findOne({
     where: {
@@ -97,4 +110,4 @@ const getUserRolebyID = async (id: number) => {
   }
 };
 
-export { initializeUser, User, createUser, getUserEmail, getUserRolebyID };
+export { initializeUser, User, createUser, getUserEmail, getUserbyID, getUserRolebyID };

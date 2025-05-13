@@ -11,10 +11,10 @@ import {
   getRequestID,
   registerRequest,
 } from "../controller/RequestController";
-import { mdfVerification } from "../middleware/roleVerification";
+import { mdfVerification, userCheck } from "../middleware/roleVerification";
 
 requestRouter.post("/get/id", getRequestID);
 requestRouter.post("/new-request", registerRequest);
-requestRouter.post("/get/dID", getRequestDoctor);
+requestRouter.post("/get/ID", getRequestDoctor);
 
 export { requestRouter };

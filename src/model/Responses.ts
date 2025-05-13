@@ -8,6 +8,7 @@ import {
   CreationOptional,
   CreationAttributes,
 } from "sequelize";
+import { Request } from "./Requests";
 
 class Response extends Model<
   InferAttributes<Response>,
@@ -57,4 +58,33 @@ const initializeResponse = (sequelize: Sequelize) => {
   );
 };
 
-export { initializeResponse, Response };
+const createResponse = async (
+  response: Omit<InferCreationAttributes<Response, { omit: never }>, "id">,
+) => {
+  return await Response.create(response);
+};
+
+const getResponseById = async (id: number) => {
+  return await Response.findOne({
+    where: {
+      id: id,
+    },
+    include: {
+      model: Request,
+      attributes: [
+        "id",
+        "patientId",
+        "doctorId",
+        "medicalFacilityId",
+        "title",
+        "description",
+        "resources",
+        "status",
+        "mdaId",
+        "priority",
+      ],
+    },
+  });
+};
+
+export { initializeResponse, Response, getResponseById, createResponse };
