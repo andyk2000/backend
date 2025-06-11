@@ -1,6 +1,4 @@
 import Crypto from "crypto";
-import path from "path";
-import { promisify } from "util";
 import jwt from "jsonwebtoken";
 
 interface Config {
@@ -8,8 +6,11 @@ interface Config {
 }
 
 const config: Config = {
-  secretKey: process.env.SECRET_KEY || "",
+  secretKey: process.env.SECRET_KEY || "your-secret-key-for-development",
 };
+
+// Export the secretKey for use in other modules
+export const secretKey = config.secretKey;
 
 const generateAccessToken = (
   email: string,
@@ -24,7 +25,7 @@ const generateAccessToken = (
     },
     config.secretKey,
     {
-      expiresIn: 3600,
+      expiresIn: "24h", // Longer expiration for better user experience
     },
   );
 };
@@ -36,3 +37,5 @@ const encryptPassword = (password: string) => {
 };
 
 export { generateAccessToken, encryptPassword };
+
+

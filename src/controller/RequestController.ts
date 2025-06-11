@@ -27,75 +27,67 @@ const priority: { [key: number]: string } = {
   3: "Low",
 };
 
-const registerRequest = async (request: Request, response: Response) => {
+const registerRequest = async (request: Request, response: Response): Promise<void> => {
   const {
-    patientId,
+    doctorId,
     medicalfacilityId,
     title,
+    patientId,
     description,
-    attachments,
+    resources,
     status,
-    doctorId,
+    date,
   } = request.body;
-  let resources = false;
-  if (attachments) {
-    resources = true;
-  }
-  // console.log("attachments:", attachments);
-  console.log("resources:", resources);
-  console.log("status:", status);
-  console.log("doctorId:", doctorId);
-  console.log("medicalfacilityId:", medicalfacilityId);
-  console.log("title:", title);
-  console.log("patientId:", patientId);
-  console.log("description:", description);
+  
   try {
     const patientIdentification = await getPatientIdentification(patientId);
-    console.log("patientIdentification:", patientIdentification);
-    if (patientIdentification) {
-      const clientRequest = await createRequest({
-        medicalFacilityId: 6,
-        title,
-        patientId: patientIdentification.id,
-        description,
-        resources,
-        status,
-        doctorId: doctorId,
-        priority: 1,
-        mdaId: 1,
-      });
-      const resourcesUpload = await uploadimage(attachments, clientRequest.id);
-      response.status(200).json(clientRequest);
-    } else {
+    if (!patientIdentification) {
       response.status(404).json({
-        error: "Patient not found",
+        success: false,
+        message: "Patient not found"
       });
+      return;
     }
+    
+    const clientRequest = await createRequest({
+      medicalFacilityId: medicalfacilityId,
+      title,
+      patientId: patientIdentification.id,
+      description,
+      resources,
+      status,
+      doctorId: doctorId,
+      priority: 1,
+      mdaId: 1,
+    });
+    
+    response.status(201).json({
+      success: true,
+      message: "Request created successfully",
+      data: clientRequest
+    });
   } catch (error) {
-    logger.error("Error creating a new request:", error);
+    logger.error("Error creating request", error);
     response.status(500).json({
-      error: "Internal server error",
+      success: false,
+      message: "Failed to create request"
     });
   }
 };
 
 const getRequestDoctor = async (request: Request, response: Response) => {
   const { id } = request.body;
-
   try {
-    const requestData = await getRequestByDoctor(id);
-
-    const formattedData = requestData.map((rqst) => ({
-      ...rqst.toJSON(),
-      priority: priority[rqst.priority],
-      status: status[rqst.status],
-    }));
-
-    response.status(200).json(formattedData);
+    const requests = await getRequestByDoctor(id);
+    response.status(200).json({
+      success: true,
+      data: requests
+    });
   } catch (error) {
-    logger.error("Error getting request by doctor ID:", error);
+    logger.error("Error retrieving requests by doctor", error);
     response.status(500).json({
-      error: "Internal server error",
+      success: false,
+      message: "Failed to retrieve requests"
     });
   }
 };
@@ -126,13 +118,13 @@ const getRequestMDF = async (request: Request, response: Response) => {
   }
 };
 
-const getRequestID = async (request: Request, response: Response) => {
+const getRequestID = async (request: Request, response: Response): Promise<void> => {
   const { id } = request.body;
   try {
     const requestData = await getRequestById(id);
     response.status(200).json(requestData);
   } catch (error) {
-    logger.error("Error getting request by patient ID:", error);
+    logger.error("Error getting request by ID:", error);
     response.status(500).json({
       error: "Internal server error",
     });
@@ -160,3 +152,5 @@ export {
   getRequestPatient,
   getRequestDoctor,
 };
+
+

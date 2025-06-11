@@ -5,34 +5,46 @@ import {
 } from "../model/MedicalFacilities";
 import { Request, Response } from "express";
 import { logger } from "../../logger";
-import { error } from "console";
 
 const allMDF = async (request: Request, response: Response) => {
   try {
     const mdfs = await findAllMDFName();
-    response.status(201).json(mdfs);
+    response.status(200).json({
+      success: true,
+      data: mdfs
+    });
   } catch (error) {
-    logger.error("Error creating new medical facility", error);
-    response.status(500).json({ error: "Internal Server Error: " + error });
+    logger.error("Error retrieving medical facilities", error);
+    response.status(500).json({ 
+      success: false, 
+      message: "Failed to retrieve medical facilities" 
+    });
   }
 };
 
-const mdfById = async (request: Request, response: Response) => {
-  const { id } = request.body;
+const mdfById = async (request: Request, response: Response): Promise<void> => {
   try {
-    const mdf = await findMDFByID(id);
-    if (mdf) {
-      response.status(200).json({
-        result: true,
-        mdf: mdf,
+    const { id } = request.body;
+    const facility = await findMDFByID(id);
+    
+    if (!facility) {
+      response.status(404).json({
+        success: false,
+        message: "Medical facility not found"
       });
-    } else {
-      logger.info("Medical facility not found with id:", id);
-      response.status(500).json({ error: "medical facility not found" });
+      return;
     }
+    
+    response.status(200).json({
+      success: true,
+      data: facility
+    });
   } catch (error) {
-    logger.error("error retrieving medical facility", error);
-    response.status(500).json({ error: "Internal Server Error: " + error });
+    logger.error("Error retrieving medical facility", error);
+    response.status(500).json({ 
+      success: false, 
+      message: "Failed to retrieve medical facility" 
+    });
   }
 };
 
@@ -48,3 +60,6 @@ const updateAdminMDF = async (request: Request, response: Response) => {
 };
 
 export { allMDF, mdfById, updateAdminMDF };
+
+
+

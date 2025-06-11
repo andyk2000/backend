@@ -1,106 +1,88 @@
-import { Request, Response } from "express";
-import { logger } from "../../logger";
-import { getUserbyID, getUserRolebyID } from "../model/Users";
+import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
+import { getUserbyID } from "../model/Users";
+import { secretKey } from "../helper/userhelper";
+import { logger } from "../../logger";
 
-const secretKey = process.env.SECRET_KEY || "zero";
-
-const mdfAdminVerification = async (
-  request: Request,
-  response: Response,
-  next: () => void,
-) => {
-  const { id } = request.body;
-  try {
-    const exist = await getUserRolebyID(id);
-    if (exist && exist === "md-admin") {
-      next();
-    } else {
-      response.status(500).json({
-        error: "user is not an admin at a medical facility",
-      });
-    }
-  } catch (error) {
-    response.status(500).json({
-      error: "internal server problem please contact your admin",
-    });
-  }
-};
-
-const endUserVerification = async (
-  request: Request,
-  response: Response,
-  next: () => void,
-) => {
-  const { id } = request.body;
-  try {
-    const exist = await getUserRolebyID(id);
-    if (exist && exist === "md-user") {
-      next();
-    } else {
-      response.status(500).json({
-        error: "user is not a user at a medical facility",
-      });
-    }
-  } catch (error) {
-    response.status(500).json({
-      error: "internal server problem please contact your admin",
-    });
-  }
-};
-
-const mdfVerification = async (
-  request: Request,
-  response: Response,
-  next: () => void,
-) => {
-  const { id } = request.body;
-  try {
-    const exist = await getUserRolebyID(id);
-    if (exist === "md-admin" || exist === "md-user") {
-      next();
-    } else {
-      response.status(500).json({
-        error: "user is not a user at a medical facility",
-      });
-    }
-  } catch (error) {
-    response.status(500).json({
-      error: "internal server problem please contact your admin",
-    });
-  }
-};
-
-const userCheck = (req: Request, res: Response, next: () => void) => {
+const userCheck = (req: Request, res: Response, next: NextFunction): void => {
+  // Check for Authorization header (Bearer token)
   const authHeader = req.headers["authorization"];
 
-  if (!authHeader) {
-    return res.status(401).json({
-      status: false,
-      error: {
-        message: "Auth headers not provided in the request.",
-      },
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    logger.info("Authorization header missing or invalid format");
+    res.status(401).json({
+      success: false,
+      message: "Authorization header missing or invalid format"
     });
+    return;
   }
 
-  jwt.verify(authHeader, secretKey, async (err, data) => {
-    if (err || !data || typeof data === "string") {
-      return res.status(403).json({
-        status: false,
-        error: "Invalid access token provided, please login again.",
+  // Extract token from Bearer format
+  const token = authHeader.split(' ')[1];
+
+  jwt.verify(token, secretKey, async (err: any, decoded: any) => {
+    if (err) {
+      logger.error("Token verification failed:", err);
+      res.status(401).json({
+        success: false,
+        message: "Invalid or expired token"
+      });
+      return;
+    }
+    
+    try {
+      const user = await getUserbyID(decoded.id);
+      
+      if (!user) {
+        logger.info(`User not found for ID: ${decoded.id}`);
+        res.status(401).json({
+          success: false,
+          message: "User not found"
+        });
+        return;
+      }
+      
+      // Attach user to res.locals for use in route handlers
+      res.locals.user = user;
+      next();
+    } catch (error) {
+      logger.error("Error retrieving user:", error);
+      res.status(500).json({
+        success: false,
+        message: "Server error while verifying user"
       });
     }
-    const user = await getUserbyID(data.id);
-    res.locals = {
-      user: user,
-    };
-    next();
   });
 };
 
-export {
-  mdfAdminVerification,
-  endUserVerification,
-  mdfVerification,
-  userCheck,
+// Add the mdfAdminVerification middleware for medical facility routes
+const mdfAdminVerification = (req: Request, res: Response, next: NextFunction): void => {
+  try {
+    const user = res.locals.user;
+    
+    // Check if user exists and is an admin
+    if (!user || user.typeOfAccount !== "md-admin") {
+      logger.info(`Admin verification failed for user: ${user?.id}`);
+      res.status(403).json({
+        success: false,
+        message: "User is not authorized to perform this action"
+      });
+      return;
+    }
+    
+    next();
+  } catch (error) {
+    logger.error("Error in admin verification:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error while verifying admin privileges"
+    });
+  }
 };
+
+export { userCheck, mdfAdminVerification };
+
+
+
+
+

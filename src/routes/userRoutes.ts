@@ -7,7 +7,7 @@ import {
   signupValidation,
 } from "../middleware/dataValidation";
 
-userRouter.post("/signup", signupValidation, signUp);
+userRouter.post("/signup", signUp);
 userRouter.post("/login", loginValidation, logIn);
 userRouter.post("/user/email-check", emailFormatCheck, emailCheck);
 

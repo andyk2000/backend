@@ -90,11 +90,7 @@ const getUserbyID = async (id: number) => {
       id: id,
     },
   });
-  if (userData) {
-    return userData.typeOfAccount;
-  } else {
-    return null;
-  }
+  return userData;
 };
 
 const getUserRolebyID = async (id: number) => {
@@ -110,4 +106,28 @@ const getUserRolebyID = async (id: number) => {
   }
 };
 
-export { initializeUser, User, createUser, getUserEmail, getUserbyID, getUserRolebyID };
+const getAllUsers = async () => {
+  return await User.findAll();
+};
+
+const updateUserStatus = async (id: number, status: string) => {
+  return await User.update(
+    { typeOfAccount: status },
+    { where: { id: id } }
+  );
+};
+
+export {
+  initializeUser,
+  createUser,
+  getUserEmail,
+  getUserbyID,
+  User,
+  getAllUsers,
+  updateUserStatus
+};
+
+
+
+
+

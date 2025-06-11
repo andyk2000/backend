@@ -25,6 +25,8 @@ import { Dependent, initializeDependent } from "./model/Dependent";
 import { requestRouter } from "./routes/requestRoutes";
 import { initializeResource, Resource } from "./model/Resources";
 import { responseRouter } from "./routes/responseroutes";
+import { authRouter } from "./routes/authRoutes";
+import { adminRouter } from "./routes/adminRoutes";
 
 const app: Express = express();
 const port = process.env.PORT;
@@ -45,8 +47,13 @@ const config: Config = {
   frontend: process.env.FRONTEND_LINK || "",
 };
 
-app.use(cors());
-app.use(bodyParser.json({ limit: "10mb" })); // Adjust the limit as needed
+// Setup middleware with more permissive CORS
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+}));
+app.use(bodyParser.json({ limit: "10mb" }));
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 
 const sequelize = new Sequelize(config.database, config.user, config.password, {
@@ -84,11 +91,15 @@ Patient.hasMany(Dependent);
 Request.hasMany(Resource);
 Resource.belongsTo(Request);
 
+// Mount routers
 app.use("/home", userRouter);
 app.use("/mdfs", mdfRouter);
 app.use("/patient", patientRouter);
 app.use("/requests", requestRouter);
 app.use("/response", responseRouter);
+app.use("/auth", authRouter);
+app.use("/admin", adminRouter);
+app.use("/user", adminRouter); // For the /user/profile endpoint
 
 app.use(errors());
 
@@ -96,3 +107,8 @@ app.listen(port, async () => {
   await sequelize.sync({ alter: true });
   console.log("Server Listening on PORT:", port);
 });
+
+
+
+
+
