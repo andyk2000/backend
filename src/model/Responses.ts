@@ -53,7 +53,6 @@ const initializeResponse = (sequelize: Sequelize) => {
     {
       sequelize,
       modelName: "response",
-      timestamps: false,
     },
   );
 };
@@ -87,4 +86,23 @@ const getResponseById = async (id: number) => {
   });
 };
 
-export { initializeResponse, Response, getResponseById, createResponse };
+const gerateResponse = async (
+  requestId: number,
+  answer: string,
+  comment: string,
+) => {
+  return await createResponse({
+    requestId,
+    answer,
+    comment,
+    date: new Date(),
+  });
+};
+
+export {
+  initializeResponse,
+  Response,
+  getResponseById,
+  createResponse,
+  gerateResponse,
+};

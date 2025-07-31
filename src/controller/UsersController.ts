@@ -1,4 +1,4 @@
-import { createUser, getUserEmail } from "../model/Users";
+import { blockUn, createUser, getAllUsers, getUserEmail } from "../model/Users";
 import { Request, Response } from "express";
 import { generateAccessToken, encryptPassword } from "../helper/userhelper";
 import { logger } from "../../logger";
@@ -133,5 +133,69 @@ const emailCheck = async (request: Request, response: Response) => {
   }
 };
 
-export { logIn, signUp, emailCheck };
+const getUserProfile = async (req: Request, res: Response): Promise<void> => {
+  try {
+    // User is already attached to res.locals by the userCheck middleware
+    const user = res.locals.user;
+    
+    if (!user) {
+      res.status(404).json({
+        success: false,
+        message: "User not found"
+      });
+      return;
+    }
+    
+    res.status(200).json({
+      success: true,
+      user: {
+        id: user.id,
+        name: user.names,
+        email: user.email,
+        role: mapTypeToRole(user.typeOfAccount),
+        title: user.title,
+        phone: user.phone,
+        institutionId: user.institutionId
+      }
+    });
+  } catch (error) {
+    logger.error("Error getting user profile", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to retrieve user profile"
+    });
+  }
+};
+
+const getAllUserData = async (req: Request, res: Response) => {
+  try {
+    const users = await getAllUsers();
+    res.status(200).json(users);
+  } catch (error) {
+    logger.error("Error getting all users", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to retrieve users"
+    });
+  }
+};
+
+const blockUser = async (req: Request, res: Response) => {
+  const { id, blocked } = req.body;
+  try {
+    await blockUn(id, blocked);
+    res.status(200).json({
+      success: true,
+      message: "User blocked successfully"
+    });
+  } catch (error) {
+    logger.error("Error blocking user", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to block user"
+    });
+  }
+};  
+
+export { logIn, signUp, emailCheck, getUserProfile, getAllUserData, blockUser };
 

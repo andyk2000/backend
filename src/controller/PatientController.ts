@@ -1,4 +1,4 @@
-import { createPatient, getPatientById } from "../model/Patients";
+import { createPatient, getAllpatients, getPatientById } from "../model/Patients";
 import { Request, Response } from "express";
 import { logger } from "../../logger";
 import { identificationGenerator } from "../helper/patientIdentification";
@@ -37,4 +37,14 @@ const getPatient = async (request: Request, response: Response) => {
   }
 };
 
-export { registerNewPatient, getPatient };
+const getPatients = async (request: Request, response: Response) => {
+  try {
+    const patients = await getAllpatients();
+    response.status(200).json(patients);
+  } catch (error) {
+    logger.error("Error getting all patients: ", error);
+    response.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+export { registerNewPatient, getPatient, getPatients };

@@ -18,6 +18,7 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
   declare institutionId: number;
   declare title: string;
   declare phone: number;
+  declare blocked: CreationOptional<boolean>;
 }
 
 const initializeUser = (sequelize: Sequelize) => {
@@ -61,6 +62,11 @@ const initializeUser = (sequelize: Sequelize) => {
       phone: {
         type: DataTypes.INTEGER,
         allowNull: false,
+      },
+      blocked: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
     },
     {
@@ -111,10 +117,19 @@ const getAllUsers = async () => {
 };
 
 const updateUserStatus = async (id: number, status: string) => {
-  return await User.update(
-    { typeOfAccount: status },
-    { where: { id: id } }
-  );
+  return await User.update({ typeOfAccount: status }, { where: { id: id } });
+};
+
+const getMdfinfo = async (id: number) => {
+  return await User.findOne({
+    where: {
+      id: id,
+    },
+  });
+};
+
+const blockUn = async (id: number, bloc: boolean) => {
+  return await User.update({ blocked: bloc }, { where: { id: id } });
 };
 
 export {
@@ -124,10 +139,9 @@ export {
   getUserbyID,
   User,
   getAllUsers,
-  updateUserStatus
+  updateUserStatus,
+  getMdfinfo,
+  blockUn,
 };
-
-
-
 
 

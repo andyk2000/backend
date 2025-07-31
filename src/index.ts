@@ -27,6 +27,7 @@ import { initializeResource, Resource } from "./model/Resources";
 import { responseRouter } from "./routes/responseroutes";
 import { authRouter } from "./routes/authRoutes";
 import { adminRouter } from "./routes/adminRoutes";
+import { appealRouter } from "./routes/appealRoutes";
 
 const app: Express = express();
 const port = process.env.PORT;
@@ -76,8 +77,8 @@ User.belongsTo(MedicalFacility);
 MedicalFacility.hasMany(User);
 Bill.belongsTo(MedicalFacility);
 MedicalFacility.hasMany(Bill);
-Request.belongsTo(User);
-User.hasMany(Request);
+Request.belongsTo(User, { foreignKey: 'doctorId', as: 'doctor' });
+User.hasMany(Request, { foreignKey: 'doctorId', as: 'doctorRequests' });
 Request.belongsTo(Patient);
 Patient.hasMany(Request);
 Request.belongsTo(MedicalFacility);
@@ -97,9 +98,10 @@ app.use("/mdfs", mdfRouter);
 app.use("/patient", patientRouter);
 app.use("/requests", requestRouter);
 app.use("/response", responseRouter);
+app.use("/appeal", appealRouter);
 app.use("/auth", authRouter);
 app.use("/admin", adminRouter);
-app.use("/user", adminRouter); // For the /user/profile endpoint
+app.use("/user", adminRouter);
 
 app.use(errors());
 
@@ -107,6 +109,7 @@ app.listen(port, async () => {
   await sequelize.sync({ alter: true });
   console.log("Server Listening on PORT:", port);
 });
+
 
 
 

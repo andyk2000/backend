@@ -10,6 +10,10 @@ import {
 } from "sequelize";
 import { User } from "./Users";
 import { Patient } from "./Patients";
+import { Resource } from "./Resources";
+import { Appeal } from "./Appeals";
+import { Response } from "./Responses";
+import { MedicalFacility } from "./MedicalFacilities";
 
 class Request extends Model<
   InferAttributes<Request>,
@@ -75,11 +79,12 @@ const initializeRequest = (sequelize: Sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
-          isIn: [[1, 2, 3, 4]],
+          isIn: [[1, 2, 3, 4, 5, 6]],
         },
       },
       mdaId: {
         type: DataTypes.INTEGER,
+        allowNull: true,
         references: {
           model: "users",
           key: "id",
@@ -106,11 +111,42 @@ const createRequest = async (
   return await Request.create(request);
 };
 
+const getAllRequest = async () => {
+  return await Request.findAll({
+    include: [
+      {
+        model: Patient,
+        attributes: ["names"],
+      },
+      {
+        model: User,
+        as: "doctor",
+        attributes: ["names"],
+      },
+    ],
+  });
+};
+
 const getRequestById = async (id: number) => {
   return await Request.findOne({
     where: {
       id: id,
     },
+    include: [
+      {
+        model: Resource,
+        attributes: ["resourcePath"],
+      },
+      {
+        model: Patient,
+        attributes: ["names"],
+      },
+      {
+        model: User,
+        as: "doctor",
+        attributes: ["names"],
+      },
+    ],
   });
 };
 
@@ -124,14 +160,25 @@ const getRequestByMDF = async (id: number) => {
 
 const getRequestByDoctor = async (id: number) => {
   return await Request.findAll({
-    attributes: ["title", "patientId", "priority", "status"],
+    attributes: ["id", "title", "patientId", "priority", "status"],
     where: {
       doctorId: id,
     },
-    include: {
-      model: Patient,
-      attributes: ["names"],
-    },
+    include: [
+      {
+        model: Resource,
+        attributes: ["resourcePath"],
+      },
+      {
+        model: Patient,
+        attributes: ["names"],
+      },
+      {
+        model: User,
+        as: "doctor",
+        attributes: ["names"],
+      },
+    ],
   });
 };
 
@@ -155,6 +202,82 @@ const updateRequestStatus = async (id: number, status: number) => {
   );
 };
 
+const changeRequestStatus = async (id: number, status: number) => {
+  const updatedRequest = await Request.update(
+    { status: status },
+    {
+      where: { id: id },
+    },
+  );
+};
+
+const getRequestWithAppeal = async (id: number) => {
+  let requestData: any = await Request.findOne({
+    where: {
+      id: id,
+    },
+    include: {
+      model: Response,
+      include: [
+        {
+          model: Appeal,
+        },
+      ],
+    },
+  });
+  return requestData;
+};
+
+const requestDataReport = async (id: number) => {
+  const requestData = await Request.findOne({
+  where: { id: id },
+  include: [
+    {
+      model: Patient,
+      attributes: [
+        "names",
+        "age",
+        "address",
+        "sex",
+        "nationalId",
+        "phone",
+        "patientIdentification",
+      ],
+    },
+    {
+      model: User,
+      as: "doctor",
+      attributes: ["names", "email", "phone", "title"],
+    },
+    {
+      model: MedicalFacility,
+      attributes: ["name", "address", "phone", "email"],
+    },
+    {
+      model: Response,
+      include: [
+        {
+          model: Appeal,
+          attributes: [
+            "argument",
+            "additionalresources",
+            "status",
+            "appealDecisionArgument",
+            "createdAt",
+          ],
+        },
+      ],
+      attributes: ["answer", "comment", "date"],
+    },
+    {
+      model: Resource,
+      attributes: ["resourcePath", "type"],
+    },
+  ],
+});
+  return requestData;
+};
+
 export {
   initializeRequest,
   createRequest,
@@ -164,4 +287,8 @@ export {
   getRequestByPatient,
   getRequestByDoctor,
   updateRequestStatus,
+  getAllRequest,
+  changeRequestStatus,
+  getRequestWithAppeal,
+  requestDataReport,
 };

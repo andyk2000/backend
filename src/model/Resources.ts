@@ -18,6 +18,7 @@ class Resource extends Model<
   declare id: CreationOptional<number>;
   declare requestId: number;
   declare resourcePath: string;
+  declare parent: string;
 }
 
 const initializeResource = (sequelize: Sequelize) => {
@@ -36,6 +37,13 @@ const initializeResource = (sequelize: Sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      parent: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          isIn: [["request", "appeal", "user"]],
+        },
+      },
     },
     {
       sequelize,
@@ -51,4 +59,18 @@ const createResource = async (
   return await Resource.create(resource);
 };
 
-export { initializeResource, Resource, createResource };
+const getResourceByRequest = async (id: number, parent: string) => {
+  return await Resource.findAll({
+    where: {
+      requestId: id,
+      parent: parent,
+    },
+  });
+};
+
+export {
+  initializeResource,
+  Resource,
+  createResource,
+  getResourceByRequest,
+};

@@ -1,6 +1,8 @@
 import {
   findAllMDFName,
   findMDFByID,
+  findMDFByName,
+  MedicalFacility,
   updateMDAdmin,
 } from "../model/MedicalFacilities";
 import { Request, Response } from "express";
@@ -20,6 +22,12 @@ const allMDF = async (request: Request, response: Response) => {
       message: "Failed to retrieve medical facilities" 
     });
   }
+};
+
+const findMDFByN = async (request: Request, response: Response) => {
+  const { name } = request.body;
+  const mdf = await findMDFByName(name);
+  response.status(200).json({ mdf });
 };
 
 const mdfById = async (request: Request, response: Response): Promise<void> => {
@@ -59,7 +67,7 @@ const updateAdminMDF = async (request: Request, response: Response) => {
   }
 };
 
-export { allMDF, mdfById, updateAdminMDF };
+export { allMDF, mdfById, updateAdminMDF, findMDFByN };
 
 
 

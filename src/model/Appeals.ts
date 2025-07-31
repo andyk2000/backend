@@ -16,9 +16,9 @@ class Appeal extends Model<
   declare id: CreationOptional<number>;
   declare responseId: number;
   declare argument: string;
-  declare additionalresources: string;
+  declare additionalresources: boolean;
   declare status: string;
-  declare date: Date;
+  declare appealDecisionArgument: string;
 }
 
 const initializeAppeal = (sequelize: Sequelize) => {
@@ -42,16 +42,19 @@ const initializeAppeal = (sequelize: Sequelize) => {
         allowNull: false,
       },
       additionalresources: {
-        type: DataTypes.STRING,
+        type: DataTypes.BOOLEAN,
         allowNull: false,
       },
       status: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          isIn: [["pending", "approved", "denied"]],
+        },
       },
-      date: {
-        type: DataTypes.DATE,
-        allowNull: false,
+      appealDecisionArgument: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
     },
     {
@@ -62,4 +65,19 @@ const initializeAppeal = (sequelize: Sequelize) => {
   );
 };
 
-export { initializeAppeal, Appeal };
+const createAppeal = async (
+  appeal: Omit<InferCreationAttributes<Appeal, { omit: never }>, "id">,
+) => {
+  return await Appeal.create(appeal);
+};
+
+const responseAppeal = async (id: number, decision: string, status: string) => {
+  return await Appeal.update(
+    { appealDecisionArgument: decision, status: status },
+    {
+      where: { id: id },
+    },
+  );
+};
+
+export { initializeAppeal, Appeal, createAppeal, responseAppeal };

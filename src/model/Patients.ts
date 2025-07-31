@@ -86,4 +86,8 @@ const getPatientById = async (id: number) => {
   });
 };
 
-export { initializePatient, createPatient, getPatientById, Patient };
+const getAllpatients = async () => {
+  return await Patient.findAll();
+};
+
+export { initializePatient, createPatient, getPatientById, getAllpatients, Patient };
